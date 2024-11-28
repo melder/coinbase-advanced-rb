@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 API_ENV_KEY = "COINBASE_API_KEY"
 API_SECRET_ENV_KEY = "COINBASE_API_SECRET"
-#USER_AGENT = f"coinbase-advanced-py/{__version__}"
+# USER_AGENT = f"coinbase-advanced-py/{__version__}"
 
 JSON_API_KEY = "name"
 JSON_API_SECRET = "privateKey"
