@@ -9,7 +9,7 @@ require "faraday"
 
 require_relative "../api_base"
 
-# RESTBase sets up, executes, and appropriate handles errors strictly within context of HTTP + REST communication
+# RESTBase sets up, executes, and appropriately handles errors strictly within context of HTTP + REST communication
 class RESTBase < APIBase
   attr_reader :session
 
@@ -52,8 +52,8 @@ class RESTBase < APIBase
     JWT.encode(claims, private_key, "ES256", header)
   end
 
-  def prepare_and_send_request(http_method, url_path, params = {}, data = {}, public = false)
-    if !public && !@authenticated
+  def prepare_and_send_request(http_method, url_path, params = {}, data = {}, _public = false)
+    if !_public && !@authenticated
       raise AuthenticationError,
             <<~HEREDOC
               Unauthenticated request to private endpoint. If you wish to access private endpoints, you must \
@@ -90,9 +90,9 @@ class RESTBase < APIBase
     res
   end
 
-  def get(url_path, params = {}, public = false, **kwargs)
+  def get(url_path, params = {}, _public = false, **kwargs)
     params.merge! kwargs unless kwargs.empty?
-    prepare_and_send_request(:get, url_path, params, {}, public)
+    prepare_and_send_request(:get, url_path, params, {}, _public)
   end
 end
 
