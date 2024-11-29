@@ -16,18 +16,12 @@ class APIBase
         raise ArgumentError,
               "Ambiguous authentication scheme: use either api_key + api_secret OR key_file"
       end
-    else
-      raise ArgumentError, "Missing API Key" unless api_key
-      raise ArgumentError, "Missing API Secret" unless api_secret
-    end
-
-    if key_file
       @key_file = key_file
       @api_key, @api_secret = parse_key_file
     else
       @key_file = nil
-      @api_key = api_key || ENV.fetch(API_ENV_KEY, nil)
-      @api_secret = api_secret || ENV.fetch(API_SECRET_ENV_KEY, nil)
+      @api_key = api_key || ENV.fetch(API_ENV_KEY, nil) || raise ArgumentError, "Missing API Key"
+      @api_secret = api_secret || ENV.fetch(API_SECRET_ENV_KEY, nil) || raise ArgumentError, "Missing API Secret"
     end
 
     @base_url = kwargs[:base_url] || BASE_URL
