@@ -3,6 +3,8 @@
 require "json"
 require_relative "constants"
 
+# APIBase serves primarily to store state required for authentication (REST / Websocket)
+# In addition it should house any contexts / configurations that are shared between communication protocols
 class APIBase
   def initialize(**kwargs)
     key_file = kwargs[:key_file]
@@ -28,9 +30,11 @@ class APIBase
       @api_secret = api_secret || ENV.fetch(API_SECRET_ENV_KEY, nil)
     end
 
-    @base_url = kwargs[:base_url]
+    @base_url = kwargs[:base_url] || BASE_URL
     @timeout = kwargs[:timeout]
     @verbose = kwargs[:verbose]
+
+    @authenticated = true
   end
 
   def parse_key_file
