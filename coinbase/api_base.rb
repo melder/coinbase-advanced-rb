@@ -20,8 +20,12 @@ class APIBase
       @api_key, @api_secret = parse_key_file
     else
       @key_file = nil
-      @api_key = api_key || ENV.fetch(API_ENV_KEY, nil) || raise ArgumentError, "Missing API Key"
-      @api_secret = api_secret || ENV.fetch(API_SECRET_ENV_KEY, nil) || raise ArgumentError, "Missing API Secret"
+
+      @api_key = api_key || ENV.fetch(API_ENV_KEY, nil)
+      raise ArgumentError, "Missing API Key" unless @api_key
+
+      @api_secret = api_secret || ENV.fetch(API_SECRET_ENV_KEY, nil)
+      raise ArgumentError, "Missing API Secret" unless @api_secret
     end
 
     @base_url = kwargs[:base_url] || BASE_URL
