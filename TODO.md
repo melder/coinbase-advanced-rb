@@ -1,2 +1,3 @@
 1. substitute puts with logger
-2. OpenStruct alternative
+2. will be using openstruct to "classify" responses. Essentially mimicking https://github.com/coinbase/coinbase-advanced-py/blob/master/coinbase/rest/types/base_response.py ... But openstruct is discouraged for performance reasons so will likely need to meta-program some custom parser or pluck each response object individually 
+3. separate JWT logic as mixin / concern?
