@@ -7,6 +7,8 @@ gem "faraday"
 gem "jwt"
 gem "openssl"
 
+gem "activesupport", require: false
+
 group :development do
   gem "rubocop"
 end

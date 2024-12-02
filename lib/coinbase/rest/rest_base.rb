@@ -7,6 +7,7 @@ module Coinbase
       attr_reader :session
 
       include Products
+      include Public
 
       def initialize(**kwargs)
         super
@@ -80,12 +81,12 @@ module Coinbase
 
         puts(res.inspect)
 
-        res
+        BaseResponse.new(JSON.parse(res.body))
       end
 
-      def get(url_path, params = {}, _public = false, **kwargs)
+      def get(url_path, params = {}, auth_required: True, **kwargs)
         params.merge! kwargs unless kwargs.empty?
-        prepare_and_send_request(:get, url_path, params, {}, _public)
+        prepare_and_send_request(:get, url_path, params, {}, auth_required)
       end
     end
 
