@@ -6,8 +6,10 @@ module Coinbase
     class RESTBase < Coinbase::APIBase
       attr_reader :session
 
-      include Products
-      include Public
+      include Resources::Futures
+      include Resources::Orders
+      include Resources::Products
+      include Resources::Public
 
       def initialize(**kwargs)
         super
@@ -48,8 +50,8 @@ module Coinbase
         JWT.encode(claims, private_key, "ES256", header)
       end
 
-      def prepare_and_send_request(http_method, url_path, params = {}, data = {}, _public = false)
-        if !_public && !@authenticated
+      def prepare_and_send_request(http_method, url_path, params = {}, data = {}, auth_required: true)
+        if auth_required && !@authenticated
           raise AuthenticationError,
                 <<~HEREDOC
                   Unauthenticated request to private endpoint. If you wish to access private endpoints, you must \
@@ -79,14 +81,17 @@ module Coinbase
           raise URI::BadURIError, "Unknown HTTP method / verb: '#{http_method}'"
         end
 
-        puts(res.inspect)
-
         BaseResponse.new(JSON.parse(res.body))
       end
 
-      def get(url_path, params = {}, auth_required: True, **kwargs)
+      def get(url_path, params = {}, auth_required: true, **kwargs)
         params.merge! kwargs unless kwargs.empty?
-        prepare_and_send_request(:get, url_path, params, {}, auth_required)
+        prepare_and_send_request(:get, url_path, params, {}, auth_required: auth_required)
+      end
+
+      def post(url_path, params = {}, data = {}, auth_required: true, **kwargs)
+        params.merge! kwargs unless kwargs.empty?
+        prepare_and_send_request(:get, url_path, params, data, auth_required: auth_required)
       end
     end
 
