@@ -2,6 +2,8 @@
 
 Ruby port of https://github.com/coinbase/coinbase-advanced-py/
 
+** Still testing locally not yet published as gem **
+
 ## Caveats:
 
 1. Starting with REST port
