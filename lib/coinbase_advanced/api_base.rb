@@ -50,8 +50,8 @@ module CoinbaseAdvanced
     alias original_inspect inspect
 
     def formatted_instance_variables
-      instance_variables.map do |var|
-        value = SENSITIVE_VARS.include?(var) ? "\"[FILTERED]\"" : instance_variable_get(var).inspect
+      instance_variables.sort.map do |var|
+        value = SENSITIVE_VARS.include?(var) ? "[FILTERED]" : instance_variable_get(var).inspect
         "#{var}=#{value}"
       end
     end
@@ -62,9 +62,11 @@ module CoinbaseAdvanced
 
     def pretty_print(pp)
       pp.object_group(self) do
-        formatted_instance_variables.each do |formatted_var|
+        instance_variables.sort.each do |var|
           pp.breakable
-          pp.text formatted_var
+          value = SENSITIVE_VARS.include?(var) ? "[FILTERED]" : instance_variable_get(var)
+          pp.text "#{var}="
+          pp.pp value
         end
       end
     end
