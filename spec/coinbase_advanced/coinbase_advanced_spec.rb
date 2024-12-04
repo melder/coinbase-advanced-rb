@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.describe Coinbase::Advanced do
+RSpec.describe CoinbaseAdvanced do
   it "has a version number" do
-    expect(Coinbase::Advanced::VERSION).not_to be nil
+    expect(CoinbaseAdvanced::VERSION).not_to be nil
   end
 
   it "does something useful" do
