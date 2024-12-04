@@ -2,6 +2,10 @@ PATH
   remote: .
   specs:
     coinbase-advanced (0.1.0)
+      activesupport
+      faraday
+      jwt
+      openssl
 
 GEM
   remote: https://rubygems.org/
