@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-module Coinbase
+module CoinbaseAdvanced
   module REST
     # RESTBase sets up, executes, and appropriately handles errors strictly within context of HTTP + REST communication
-    class RESTBase < Coinbase::APIBase
+    class RESTBase < CoinbaseAdvanced::APIBase
       attr_reader :session
 
       include Resources::Futures
@@ -20,7 +20,7 @@ module Coinbase
         uri = "#{method} #{@base_url}#{path}"
 
         @session.headers = {
-          "User-Agent" => Coinbase::USER_AGENT,
+          "User-Agent" => CoinbaseAdvanced::USER_AGENT,
           "Content-Type" => "application/json"
         }
 

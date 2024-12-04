@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Coinbase
+module CoinbaseAdvanced
   API_ENV_KEY = "COINBASE_API_KEY"
   API_SECRET_ENV_KEY = "COINBASE_API_SECRET"
   USER_AGENT = "coinbase-advanced-rb/0.0.1"

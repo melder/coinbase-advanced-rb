@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-module Coinbase
+module CoinbaseAdvanced
   module REST
     module Resources
       module Products
         def get_products(params = {})
-          endpoint = "#{Coinbase::API_PREFIX}/products"
+          endpoint = "#{CoinbaseAdvanced::API_PREFIX}/products"
           get(endpoint, params)
         end
 
         def list_products(params = {})
-          endpoint = "#{Coinbase::API_PREFIX}/products"
+          endpoint = "#{CoinbaseAdvanced::API_PREFIX}/products"
           get(endpoint, params)
         end
       end

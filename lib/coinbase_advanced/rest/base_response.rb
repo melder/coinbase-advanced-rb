@@ -2,7 +2,7 @@
 
 require "active_support/inflector"
 
-module Coinbase
+module CoinbaseAdvanced
   module REST
     # Converts JSON object to Ruby-style object
     # Similar to https://github.com/coinbase/coinbase-advanced-py/blob/v1.8.1/coinbase/rest/types/base_response.py

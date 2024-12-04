@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-module Coinbase
+module CoinbaseAdvanced
   module REST
     module Resources
       module Public
         def get_unix_time(params = {})
-          endpoint = "#{Coinbase::API_PREFIX}/time"
+          endpoint = "#{CoinbaseAdvanced::API_PREFIX}/time"
           get(endpoint, params, auth_required: false)
         end
       end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Coinbase
+module CoinbaseAdvanced
   # APIBase serves primarily to store state required for authentication (REST / Websocket)
   # In addition it should house any contexts / configurations that are shared between communication protocols
   class APIBase

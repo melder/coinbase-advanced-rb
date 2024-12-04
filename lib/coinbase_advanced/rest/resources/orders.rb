@@ -1,9 +1,9 @@
-module Coinbase
+module CoinbaseAdvanced
   module REST
     module Resources
       module Orders
         def create_order(product_id:, side:, order_configuration:, client_order_id: nil, **opts)
-          endpoint = "#{Coinbase::API_PREFIX}/orders"
+          endpoint = "#{CoinbaseAdvanced::API_PREFIX}/orders"
           post(
             endpoint,
             {},
