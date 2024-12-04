@@ -4,6 +4,8 @@ module CoinbaseAdvanced
   # APIBase serves primarily to store state required for authentication (REST / Websocket)
   # In addition it should house any contexts / configurations that are shared between communication protocols
   class APIBase
+    SENSITIVE_VARS = [:@api_key, :@api_secret]
+
     def initialize(**kwargs)
       key_file = kwargs[:key_file]
       api_key = kwargs[:api_key]
@@ -43,6 +45,28 @@ module CoinbaseAdvanced
       end
 
       [js[name], js[secret]]
+    end
+
+    alias original_inspect inspect
+
+    def formatted_instance_variables
+      instance_variables.map do |var|
+        value = SENSITIVE_VARS.include?(var) ? "\"[FILTERED]\"" : instance_variable_get(var).inspect
+        "#{var}=#{value}"
+      end
+    end
+
+    def inspect
+      "#<#{self.class}: #{formatted_instance_variables.join(', ')}>"
+    end
+
+    def pretty_print(pp)
+      pp.object_group(self) do
+        formatted_instance_variables.each do |formatted_var|
+          pp.breakable
+          pp.text formatted_var
+        end
+      end
     end
   end
 end
