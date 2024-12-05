@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "lib/coinbase_advanced/version"
+require_relative "lib/coinbase/advanced/version"
 
 Gem::Specification.new do |spec|
   spec.name = "coinbase-advanced"
-  spec.version = CoinbaseAdvanced::VERSION
+  spec.version = Coinbase::Advanced::VERSION
   spec.authors = ["Michael Elder"]
   spec.email = ["eldertree@gmail.com"]
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "coinbase_advanced"
+require "coinbase/advanced"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
