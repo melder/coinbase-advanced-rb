@@ -2,6 +2,8 @@
 
 Ruby port of https://github.com/coinbase/coinbase-advanced-py/
 
+** If you are an experienced ruby / SDK dev would highly appreciate any guidance, even a review would be highly appreciated as two heads are better than one **
+
 ** Still testing locally not yet published as gem **
 
 ## Caveats:
