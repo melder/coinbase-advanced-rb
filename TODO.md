@@ -5,3 +5,5 @@
 5. need someone to help test perpetual resource endpoints
 6. yard documentation of endpoints would be nice
 7. support sandbox mode
+8. following TODO #2, need to make executive decision regarding namespacing resources, "orders" being the main culprit as some methods are ambiguous. e.g. - due to being rails-brained - "get_orders" redundant vs just "orders". but then under rails paradigm create_order is also redundant (GET:order vs POST:order). not to mention coinbase API reference using "GET", "LIST", "CREATE" kinda loosely is ... annoying. aliasing methods for now to avoid existential crisis and coding paralysis.
+9. For orders: include helper methods for market / limit orders? or beyond scope of wrapper?
