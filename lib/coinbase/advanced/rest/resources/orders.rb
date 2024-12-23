@@ -6,48 +6,39 @@ module Coinbase
       module Resources
         module Orders
           # See TODO.md #8
-          alias_method :get_order, :order
+          alias get_order order
 
-          alias_method :get_orders, :orders
-          alias_method :list_orders, :orders
+          alias get_orders orders
+          alias list_orders orders
 
-          alias_method :get_order_fills, :fills
-          alias_method :list_fills, :fills
-
+          alias get_order_fills fills
+          alias list_fills fills
 
           def create_order(params = {})
             raise ArgumentError, "Missing product_id" unless params.key? :product_id
-            raise ArgumentError, "Missing :start" unless params.key? :side
-            raise ArgumentError, "Missing :end" unless params.key? :order_configuration
-            raise ArgumentError, "Missing :granularity" unless params.key? :client_order_id
+            raise ArgumentError, "Missing :start" unless params.key? :start
+            raise ArgumentError, "Missing :end" unless params.key? :end
+            raise ArgumentError, "Missing :granularity" unless params.key? :granularity
 
             endpoint = "#{CoinbaseAdvanced::API_PREFIX}/orders"
             post(endpoint, {}, params)
           end
 
-          def cancel_orders(params = {})
-          end
+          def cancel_orders(params = {}); end
 
-          def edit_order(params = {})
-          end
+          def edit_order(params = {}); end
 
-          def edit_order_preview(params = {})
-          end
+          def edit_order_preview(params = {}); end
 
-          def order(params = {})
-          end
+          def order(params = {}); end
 
-          def orders(params = {})
-          end
+          def orders(params = {}); end
 
-          def fills(params = {})
-          end
+          def fills(params = {}); end
 
-          def preview_order(params = {})
-          end
+          def preview_order(params = {}); end
 
-          def close_positions(params = {})
-          end
+          def close_positions(params = {}); end
         end
       end
     end

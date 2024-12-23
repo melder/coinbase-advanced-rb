@@ -81,7 +81,7 @@ module Coinbase
             raise URI::BadURIError, "Unknown HTTP method / verb: '#{http_method}'"
           end
 
-          pp res
+          # pp res
           BaseResponse.new(JSON.parse(res.body))
         end
 
