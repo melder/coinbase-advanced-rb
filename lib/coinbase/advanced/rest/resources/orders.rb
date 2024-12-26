@@ -12,7 +12,7 @@ module Coinbase
             raise ArgumentError, "Missing :end" unless params.key? :end
             raise ArgumentError, "Missing :granularity" unless params.key? :granularity
 
-            endpoint = "#{CoinbaseAdvanced::API_PREFIX}/orders"
+            endpoint = "#{Coinbase::Advanced::API_PREFIX}/orders"
             post(endpoint, {}, params)
           end
 

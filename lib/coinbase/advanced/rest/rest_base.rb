@@ -81,7 +81,7 @@ module Coinbase
                        raise URI::BadURIError, "Unknown HTTP method / verb: '#{http_method}'"
                      end
 
-          @config.log("Response object:\n\n#{response.to_pretty_print}") if @verbose
+          @config.log("Response object:\n\n#{response.pretty_inspect}") if @verbose
 
           BaseResponse.new(JSON.parse(response.body))
         end

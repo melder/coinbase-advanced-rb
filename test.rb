@@ -3,18 +3,15 @@
 require_relative "lib/coinbase/advanced"
 
 # first export COINBASE_JSON_KEY_FILE=absolute_key_file_path
-key_file = ENV.fetch("COINBASE_JSON_KEY_FILE", nil)
+Coinbase::Advanced.key_file = ENV.fetch("COINBASE_JSON_KEY_FILE", nil)
+Coinbase::Advanced.verbose = true
 
-Configuration.new
 client = Coinbase::Advanced::REST::RESTBase.new
 
 # Testing stuff
 
-res = client.server_time&.response
-pp res
-
-res = client.product("BIT-27DEC24-CDE")&.response
-pp res
+client.server_time&.response
+client.product("BIT-27DEC24-CDE")&.response
 
 # pp client.public_product_book(product_id: "BTC-USD")
 
