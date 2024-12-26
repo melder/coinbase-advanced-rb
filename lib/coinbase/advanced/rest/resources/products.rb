@@ -6,51 +6,42 @@ module Coinbase
       module Resources
         module Products
           def best_bid_ask(params = {})
-            endpoint = "#{Coinbase::Advanced::API_PREFIX}/best_bid_ask"
-            get(endpoint, params)
+            get("best_bid_ask", params)
           end
 
-          def product_book(product_id, params = {})
-            raise ArgumentError, "Missing product_id" if product_id.empty?
+          def product_book(params = {})
+            raise ArgumentError, "Missing :product_id" unless params.key? :product_id
 
-            endpoint = "#{Coinbase::Advanced::API_PREFIX}/product_book"
-            get(endpoint, params)
+            get("product_book", params)
           end
 
           def products(params = {})
-            endpoint = "#{Coinbase::Advanced::API_PREFIX}/products"
-            get(endpoint, params)
+            get("products", params)
           end
 
-          def product(product_id, params = {})
-            raise ArgumentError, "Missing product_id" if product_id.empty?
+          def product(params = {})
+            raise ArgumentError, "Missing :product_id" unless params.key? :product_id
 
-            endpoint = "#{Coinbase::Advanced::API_PREFIX}/products/#{product_id}"
-            get(endpoint, params)
+            get("products/#{params[:product_id]}", params)
           end
 
-          def product_candles(product_id, params = {})
-            raise ArgumentError, "Missing product_id" if product_id.empty?
+          def product_candles(params = {})
+            raise ArgumentError, "Missing :product_id" unless params.key? :product_id
             raise ArgumentError, "Missing :start" unless params.key? :start
             raise ArgumentError, "Missing :end" unless params.key? :end
             raise ArgumentError, "Missing :granularity" unless params.key? :granularity
 
-            endpoint = "#{Coinbase::Advanced::API_PREFIX}/products/#{product_id}/candles"
-            get(endpoint, params)
+            get("products/#{params[:product_id]}/candles", params)
           end
 
-          def market_trades(product_id, params = {})
-            raise ArgumentError, "Missing product_id" if product_id.empty?
+          def market_trades(params = {})
+            raise ArgumentError, "Missing :product_id" unless params.key? :product_id
             raise ArgumentError, "Missing :limit" unless params.key? :limit
 
-            endpoint = "#{Coinbase::Advanced::API_PREFIX}/products/#{product_id}/ticker"
-            get(endpoint, params)
+            get("products/#{params[:product_id]}/ticker", params)
           end
         end
       end
     end
   end
 end
-# class ListProductsResponse < BaseResponse
-#   def initialize()
-# end

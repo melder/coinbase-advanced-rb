@@ -19,7 +19,6 @@ module Coinbase
 
         def initialize(config = Coinbase::Advanced.config)
           super
-          @verbose = config.verbose
           @session = Faraday.new
         end
 
@@ -60,6 +59,8 @@ module Coinbase
 
         def prepare_and_send_request(http_method, url_path, params = {}, data = {}, auth_required: true)
           raise AuthenticationError, AUTH_ERROR_MESSAGE if auth_required && !@authenticated
+
+          url_path = "#{@api_prefix}/#{url_path.dup}"
 
           set_headers(http_method, url_path)
           @session.params = params unless params.empty?

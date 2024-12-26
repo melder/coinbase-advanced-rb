@@ -16,7 +16,10 @@ module Coinbase
         @api_secret = config&.api_secret
 
         @base_url = config&.base_url
+        @api_prefix = config&.api_prefix
         @timeout = config&.timeout
+
+        @verbose = config&.verbose
 
         @authenticated = authenticate
         @config.log("Authentication failed. You may only access public endpoints.", :warn) unless @authenticated

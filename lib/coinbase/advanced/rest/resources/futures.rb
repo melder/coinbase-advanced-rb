@@ -6,8 +6,7 @@ module Coinbase
       module Resources
         module Futures
           def list_futures_positions
-            endpoint = "#{Coinbase::Advanced::API_PREFIX}/cfm/positions"
-            get(endpoint)
+            get("cfm/positions")
           end
         end
       end
