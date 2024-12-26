@@ -4,6 +4,7 @@ module Coinbase
   module Advanced
     module REST
       module Resources
+        # https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_postorder
         module Orders
           def create_order(params = {})
             raise ArgumentError, "Missing product_id" unless params.key? :product_id

@@ -12,20 +12,27 @@ module Coinbase
         include Resources::Products
         include Resources::Public
 
+        AUTH_ERROR_MESSAGE = <<~HEREDOC
+          Unauthenticated request to private endpoint. If you wish to access private endpoints, you must \
+          provide your API key and secret when initializing the RESTClient.
+        HEREDOC
+
         def initialize(config = Coinbase::Advanced.config)
           super
+          @verbose = config.verbose
           @session = Faraday.new
         end
 
         def set_headers(method, path)
-          uri = "#{method} #{@base_url}#{path}"
-
           @session.headers = {
             "User-Agent" => Coinbase::Advanced::USER_AGENT,
             "Content-Type" => "application/json"
           }
 
-          @session.headers["Authorization"] = "Bearer #{build_jwt(uri)}" if @authenticated
+          return unless @authenticated
+
+          uri = "#{method} #{@base_url}#{path}"
+          @session.headers["Authorization"] = "Bearer #{build_jwt(uri)}"
         end
 
         # copied rb sample from https://docs.cdp.coinbase.com/advanced-trade/docs/ws-auth#code-samples
@@ -52,13 +59,7 @@ module Coinbase
         end
 
         def prepare_and_send_request(http_method, url_path, params = {}, data = {}, auth_required: true)
-          if auth_required && !@authenticated
-            raise AuthenticationError,
-                  <<~HEREDOC
-                    Unauthenticated request to private endpoint. If you wish to access private endpoints, you must \
-                    provide your API key and secret when initializing the RESTClient.
-                  HEREDOC
-          end
+          raise AuthenticationError, AUTH_ERROR_MESSAGE if auth_required && !@authenticated
 
           set_headers(http_method, url_path)
           @session.params = params unless params.empty?
@@ -71,18 +72,18 @@ module Coinbase
         def send_request(http_method, url_path, data = {})
           url = URI::HTTPS.build(host: @base_url, path: url_path).to_s
 
-          puts "Sending #{http_method} to #{url} with body #{data.to_json}"
+          @config.log("Sending #{http_method.to_s.upcase}:#{url} with body #{data.to_json}") if @verbose
 
-          # doesn't mesh well with faraday, will need to refactor
-          case http_method
-          when :get then res = @session.get(url)
-          when :post then res = @session.post(url, data.to_json)
-          else
-            raise URI::BadURIError, "Unknown HTTP method / verb: '#{http_method}'"
-          end
+          response = case http_method
+                     when :get then @session.get(url)
+                     when :post then @session.post(url, data.to_json)
+                     else
+                       raise URI::BadURIError, "Unknown HTTP method / verb: '#{http_method}'"
+                     end
 
-          # pp res
-          BaseResponse.new(JSON.parse(res.body))
+          @config.log("Response object:\n\n#{response.to_pretty_print}") if @verbose
+
+          BaseResponse.new(JSON.parse(response.body))
         end
 
         def get(url_path, params = {}, auth_required: true, **kwargs)

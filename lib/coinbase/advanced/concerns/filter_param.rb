@@ -1,6 +1,11 @@
+# frozen_string_literal: true
+
 module Coinbase
   module Advanced
     module Concerns
+      # FilterParam is a concern that provides a way to filter sensitive parameters from being logged
+      # Similar to rails filter_parameters
+      # https://api.rubyonrails.org/classes/ActionDispatch/Http/FilterParameters.html
       module FilterParam
         def original_inspect
           inspect
