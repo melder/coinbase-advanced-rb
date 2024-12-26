@@ -59,7 +59,7 @@ class Configuration
 
   # Currently only supporting default logger
   def logger=(logger)
-    raise ArgumentError, "Invalid log level" unless logger.is_a?(Logger)
+    raise ArgumentError, "Only default logger supported" unless logger.is_a?(Logger)
 
     @logger = logger
   end

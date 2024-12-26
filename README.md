@@ -16,3 +16,16 @@ Ruby port of https://github.com/coinbase/coinbase-advanced-py/
 ### Personal architectural choices
 
 * **jwt_generator.rb is stubbed out for now. JWT generation logic cotained in coinbase/rest/rest_base.rb.** Reason being is I'm in the process of reading the JWT RFC and don't see a need to generalize / modularize it while focusing on REST. Added to TODO
+
+### Configuration
+
+```ruby
+Coinbase::Advanced::Configuration.new.setup do |config|
+  config.api_key = "your_api_key"
+  config.api_secret = "your_api_secret"
+  config.base_url = "https://api.coinbase.com"
+  config.timeout = 60
+  config.verbose = true
+  config.logger = Logger.new(STDOUT)
+end
+```
