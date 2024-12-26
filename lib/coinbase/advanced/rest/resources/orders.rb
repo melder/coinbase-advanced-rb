@@ -5,15 +5,6 @@ module Coinbase
     module REST
       module Resources
         module Orders
-          # See TODO.md #8
-          alias get_order order
-
-          alias get_orders orders
-          alias list_orders orders
-
-          alias get_order_fills fills
-          alias list_fills fills
-
           def create_order(params = {})
             raise ArgumentError, "Missing product_id" unless params.key? :product_id
             raise ArgumentError, "Missing :start" unless params.key? :start
@@ -39,6 +30,15 @@ module Coinbase
           def preview_order(params = {}); end
 
           def close_positions(params = {}); end
+
+          # See TODO.md #8
+          alias get_order order
+
+          alias get_orders orders
+          alias list_orders orders
+
+          alias get_order_fills fills
+          alias list_fills fills
         end
       end
     end
