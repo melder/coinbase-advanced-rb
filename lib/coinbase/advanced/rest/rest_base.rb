@@ -12,7 +12,7 @@ module Coinbase
         include Resources::Products
         include Resources::Public
 
-        def initialize(**kwargs)
+        def initialize(config = Coinbase::Advanced.config)
           super
           @session = Faraday.new
         end

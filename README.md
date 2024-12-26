@@ -19,13 +19,22 @@ Ruby port of https://github.com/coinbase/coinbase-advanced-py/
 
 ### Configuration
 
+Example config + defaults
+
 ```ruby
 Coinbase::Advanced::Configuration.new.setup do |config|
-  config.api_key = "your_api_key"
-  config.api_secret = "your_api_secret"
-  config.base_url = "https://api.coinbase.com"
-  config.timeout = 60
-  config.verbose = true
-  config.logger = Logger.new(STDOUT)
+  ### not recommended to hard code the following. use environment vars and ENV.fetch(ENV_VAR, nil) instead
+  config.key_file = "absolute path to key file"  # default env var: COINBASE_JSON_KEY_FILE
+  config.api_key = "your_api_key"                # default env var: COINBASE_API_KEY
+  config.api_secret = "your_api_secret"          # default env var:COINBASE_API_SECRET
+  ###
+
+  config.base_url = "api.coinbase.com"
+  config.api_prefix = "/api/v3/brokerage"
+  config.timeout = 30
+  config.verbose = false
+  config.logger = Logger.new($stdout)
+  config.log_level = :info # :debug / :info / :warn / :error / :fatal
+  config.log_filter_params = ["api_key", "api_secret"] # filters sensitive params from log / console
 end
 ```

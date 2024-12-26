@@ -6,9 +6,6 @@ module Coinbase
     API_SECRET_ENV_KEY = "COINBASE_API_SECRET"
     USER_AGENT = "coinbase-advanced-rb/0.0.1"
 
-    JSON_API_KEY = "name"
-    JSON_API_SECRET = "privateKey"
-
     # REST Constants
     BASE_URL = "api.coinbase.com"
     API_PREFIX = "/api/v3/brokerage"
