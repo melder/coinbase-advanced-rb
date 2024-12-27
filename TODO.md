@@ -5,11 +5,11 @@
 5. need someone to help test perpetual resource endpoints
 6. yard documentation of endpoints would be nice
 7. support sandbox mode
-8. following TODO #2, need to make executive decision regarding namespacing resources, "orders" being the main culprit as some methods are ambiguous. e.g. - due to being rails-brained - "get_orders" redundant vs just "orders". but then under rails paradigm create_order is also redundant (GET:order vs POST:order). not to mention coinbase API reference using "GET", "LIST", "CREATE" kinda loosely is ... annoying. aliasing methods for now to avoid existential crisis and coding paralysis.
 9. For orders: include helper methods for market / limit orders? or beyond scope of wrapper?
 10. make logger "globally" accessible. @config.log("abc", :info)
 11. keep constants.rb ?
 12. Docker devcontainer would be nice
+13. move test.rb to examples directory
 
 # DONE
 
@@ -17,3 +17,8 @@
 4. Would be nice to have helper function for futures to see whether futures market is open or not (hopefully coinbase provides one at some point). Otherwise up to SDK user to query + cache product endpoint for open status. Maybe beyond scope of API wrapper?
 
 ^ executive decision is it is beyond scope. helpers / concerns / decorators / whatever will be contained in separate repo / gem.
+
+
+8. following TODO #2, need to make executive decision regarding namespacing resources, "orders" being the main culprit as some methods are ambiguous. e.g. - due to being rails-brained - "get_orders" redundant vs just "orders". but then under rails paradigm create_order is also redundant (GET:order vs POST:order). not to mention coinbase API reference using "GET", "LIST", "CREATE" kinda loosely is ... annoying. aliasing methods for now to avoid existential crisis and coding paralysis.
+
+^ Executive decision: to avoid confusion go full explicit and map 1:1 with API reference. No aliasing. Coinbase already achieved a mind-boggling level of incoherence between endpoint namespacing, verbiage, and mapping endpoint names to API reference that - although I almost feel an obligation to in the spirit of coinbase - I will spare the brave souls using this library the additional layer of complication.

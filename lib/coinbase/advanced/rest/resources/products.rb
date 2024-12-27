@@ -5,27 +5,27 @@ module Coinbase
     module REST
       module Resources
         module Products
-          def best_bid_ask(params = {})
+          def get_best_bid_ask(params = {})
             get("best_bid_ask", params)
           end
 
-          def product_book(params = {})
+          def get_product_book(params = {})
             raise ArgumentError, "Missing :product_id" unless params.key? :product_id
 
             get("product_book", params)
           end
 
-          def products(params = {})
+          def list_products(params = {})
             get("products", params)
           end
 
-          def product(params = {})
+          def get_product(params = {})
             raise ArgumentError, "Missing :product_id" unless params.key? :product_id
 
             get("products/#{params[:product_id]}", params)
           end
 
-          def product_candles(params = {})
+          def get_product_candles(params = {})
             raise ArgumentError, "Missing :product_id" unless params.key? :product_id
             raise ArgumentError, "Missing :start" unless params.key? :start
             raise ArgumentError, "Missing :end" unless params.key? :end
@@ -34,7 +34,7 @@ module Coinbase
             get("products/#{params[:product_id]}/candles", params)
           end
 
-          def market_trades(params = {})
+          def get_market_trades(params = {})
             raise ArgumentError, "Missing :product_id" unless params.key? :product_id
             raise ArgumentError, "Missing :limit" unless params.key? :limit
 

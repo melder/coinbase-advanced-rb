@@ -9,8 +9,10 @@ Coinbase::Advanced.api_key = nil if File.exist? Coinbase::Advanced.key_file
 Coinbase::Advanced.verbose = true
 client = Coinbase::Advanced::REST::RESTBase.new
 
-client.server_time
-client.product(product_id: "BIT-27DEC24-CDE")
+client.get_server_time
+client.get_product(product_id: "BIT-27DEC24-CDE")
+client.list_fills
+client.list_futures_positions
 
 # pp client.public_product_book(product_id: "BTC-USD")
 

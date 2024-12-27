@@ -5,11 +5,11 @@ module Coinbase
     module REST
       module Resources
         module Public
-          def server_time
+          def get_server_time
             get("time", {}, auth_required: false)
           end
 
-          def public_product_book(params = {})
+          def get_public_product_book(params = {})
             raise ArgumentError, "Missing :product_id" unless params.key? :product_id
 
             get("market/product_book", params, auth_required: false)
@@ -19,13 +19,13 @@ module Coinbase
             get("market/products", params, auth_required: false)
           end
 
-          def public_product(params = {})
+          def get_public_product(params = {})
             raise ArgumentError, "Missing :product_id" unless params.key? :product_id
 
             get("market/products/#{params[:product_id]}", params, auth_required: false)
           end
 
-          def public_product_candles(params = {})
+          def get_public_product_candles(params = {})
             raise ArgumentError, "Missing :product_id" unless params.key? :product_id
             raise ArgumentError, "Missing :start" unless params.key? :start
             raise ArgumentError, "Missing :end" unless params.key? :end
@@ -34,7 +34,7 @@ module Coinbase
             get("market/products/#{params[:product_id]}/candles", params, auth_required: false)
           end
 
-          def public_market_trades(params = {})
+          def get_public_market_trades(params = {})
             raise ArgumentError, "Missing :product_id" unless params.key? :product_id
             raise ArgumentError, "Missing :limit" unless params.key? :limit
 
