@@ -40,7 +40,8 @@ module Coinbase
           def get_order(params = {})
             raise ArgumentError, "Missing order_id" unless params.key? :order_id
 
-            get("orders/historical/#{params[:order_id]}", params)
+            order_id = params.delete(:order_id)
+            get("orders/historical/#{order_id}", params)
           end
 
           def list_orders(params = {})

@@ -5,7 +5,7 @@ module Coinbase
     module REST
       module Resources
         module Public
-          def get_server_time
+          def get_server_time # rubocop:disable Naming/AccessorMethodName
             get("time", {}, auth_required: false)
           end
 
@@ -22,7 +22,8 @@ module Coinbase
           def get_public_product(params = {})
             raise ArgumentError, "Missing :product_id" unless params.key? :product_id
 
-            get("market/products/#{params[:product_id]}", params, auth_required: false)
+            product_id = params.delete(:product_id)
+            get("market/products/#{product_id}", params, auth_required: false)
           end
 
           def get_public_product_candles(params = {})
@@ -31,14 +32,16 @@ module Coinbase
             raise ArgumentError, "Missing :end" unless params.key? :end
             raise ArgumentError, "Missing :granularity" unless params.key? :granularity
 
-            get("market/products/#{params[:product_id]}/candles", params, auth_required: false)
+            product_id = params.delete(:product_id)
+            get("market/products/#{product_id}/candles", params, auth_required: false)
           end
 
           def get_public_market_trades(params = {})
             raise ArgumentError, "Missing :product_id" unless params.key? :product_id
             raise ArgumentError, "Missing :limit" unless params.key? :limit
 
-            get("market/products/#{params[:product_id]}/ticker", params, auth_required: false)
+            product_id = params.delete(:product_id)
+            get("market/products/#{product_id}/ticker", params, auth_required: false)
           end
         end
       end

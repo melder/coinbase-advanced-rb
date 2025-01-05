@@ -22,7 +22,8 @@ module Coinbase
           def get_product(params = {})
             raise ArgumentError, "Missing :product_id" unless params.key? :product_id
 
-            get("products/#{params[:product_id]}", params)
+            product_id = params.delete(:product_id)
+            get("products/#{product_id}", params)
           end
 
           def get_product_candles(params = {})
@@ -31,14 +32,16 @@ module Coinbase
             raise ArgumentError, "Missing :end" unless params.key? :end
             raise ArgumentError, "Missing :granularity" unless params.key? :granularity
 
-            get("products/#{params[:product_id]}/candles", params)
+            product_id = params.delete(:product_id)
+            get("products/#{product_id}/candles", params)
           end
 
           def get_market_trades(params = {})
             raise ArgumentError, "Missing :product_id" unless params.key? :product_id
             raise ArgumentError, "Missing :limit" unless params.key? :limit
 
-            get("products/#{params[:product_id]}/ticker", params)
+            product_id = params.delete(:product_id)
+            get("products/#{product_id}/ticker", params)
           end
         end
       end

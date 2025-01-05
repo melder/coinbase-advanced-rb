@@ -78,6 +78,8 @@ module Coinbase
           response = case http_method
                      when :get then @session.get(url)
                      when :post then @session.post(url, data.to_json)
+                     when :put then @session.put(url, data.to_json)
+                     when :delete then @session.delete(url, data.to_json)
                      else
                        raise URI::BadURIError, "Unknown HTTP method / verb: '#{http_method}'"
                      end
@@ -87,14 +89,20 @@ module Coinbase
           BaseResponse.new(JSON.parse(response.body))
         end
 
-        def get(url_path, params = {}, auth_required: true, **kwargs)
-          params.merge! kwargs unless kwargs.empty?
+        def get(url_path, params = {}, auth_required: true)
           prepare_and_send_request(:get, url_path, params, {}, auth_required: auth_required)
         end
 
-        def post(url_path, params = {}, data = {}, auth_required: true, **_kwargs)
-          # params.merge! kwargs unless kwargs.empty?
+        def post(url_path, params = {}, data = {}, auth_required: true)
           prepare_and_send_request(:post, url_path, params, data, auth_required: auth_required)
+        end
+
+        def put(url_path, params = {}, data = {}, auth_required: true)
+          prepare_and_send_request(:put, url_path, params, data, auth_required: auth_required)
+        end
+
+        def delete(url_path, params = {}, data = {}, auth_required: true)
+          prepare_and_send_request(:delete, url_path, params, data, auth_required: auth_required)
         end
       end
 
