@@ -55,7 +55,7 @@ Coinbase::Advanced.verbose = false
 ## Examples
 
 ```ruby
-require "coinbase-advanced"
+require "coinbase/advanced"
 
 # recommended to simply point to key file rather than exporting api key/secret individually
 # first export COINBASE_JSON_KEY_FILE=absolute_key_file_path
