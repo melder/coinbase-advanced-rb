@@ -52,7 +52,7 @@ class Configuration
 
     @key_file = ENV.fetch("COINBASE_JSON_KEY_FILE", nil)
     @api_key = ENV.fetch("COINBASE_API_KEY", nil)
-    @api_secret = ENV.fetch("COINBASE_API_SECRET", nil)
+    @api_secret = ENV.fetch("COINBASE_API_SECRET", nil)&.gsub('\n', "\n")
 
     @logger = DEFAULT_LOGGER
     @logger.level = DEFAULT_LOG_LEVEL
