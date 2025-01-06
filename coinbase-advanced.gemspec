@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["Michael Elder"]
   spec.email = ["eldertree@gmail.com"]
 
-  spec.summary = "Coinbase Advanced API Ruby SDK"
-  spec.description = "Unofficial implementation of Coinbase Advanced Trade API"
+  spec.summary = "Coinbase Advanced API Ruby Wrapper"
+  spec.description = "Ruby wrapper for Coinbase Advanced Trade API"
   spec.homepage = "https://docs.cdp.coinbase.com/advanced-trade/docs/welcome"
   spec.required_ruby_version = ">= 3.0.0"
 
@@ -31,10 +31,10 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # Uncomment to register a new dependency of your gem
-  spec.add_dependency "activesupport"
-  spec.add_dependency "faraday"
-  spec.add_dependency "jwt"
-  spec.add_dependency "openssl"
+  spec.add_dependency "activesupport", "~> 8.0"
+  spec.add_dependency "faraday", "~> 2.12"
+  spec.add_dependency "jwt", "~> 2.9"
+  spec.add_dependency "openssl", "~> 3.2"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html

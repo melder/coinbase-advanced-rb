@@ -1,23 +1,36 @@
-# Coinbase Advanced API Ruby SDK (Unofficial)
+# Coinbase Advanced API Ruby Wrapper (Unofficial)
 
-Ruby port of https://github.com/coinbase/coinbase-advanced-py/
+Ruby wrapper for Coinbase Advanced API. **UNOFFICIAL** as the author is not employed or associated with Coinbase nor has this gem been vetted by Coinbase. 
 
-** If you are an experienced ruby / SDK dev would highly appreciate any guidance, even a review would be highly appreciated as two heads are better than one **
+https://docs.cdp.coinbase.com/advanced-trade/docs/welcome
 
-** Still testing locally not yet published as gem **
+**If you are an experienced ruby / SDK dev would highly appreciate any guidance, even a review would be highly appreciated as two heads are better than one**
 
 ## Caveats:
 
-1. Starting with REST port
-2. WebSocket not supported yet and won't be until REST is complete which could take a while
-3. To speed up completion, I'm trying my best to keep the structure as similar as possible (directories, file names, classes, method signatures, order, etc) but will adhere to ruby gem convention / style first and foremost.
-4. While in dev phase any major departures from the python SDK based on my personal preference (rather than convention) will be documented below ↓
+1. Only REST implemented - https://docs.cdp.coinbase.com/advanced-trade/reference
+2. Not all endpoints fully tested
+3. Some cleanup / refactoring scheduled
+4. Need to implement some tests
+5. Need to pepper in additional logging
 
-### Personal architectural choices
+Consider this wrapper in alpha / prototype stage. Publishing it despite lack of polish hoping it provides others some utility.
 
-* **jwt_generator.rb is stubbed out for now. JWT generation logic cotained in coinbase/rest/rest_base.rb.** Reason being is I'm in the process of reading the JWT RFC and don't see a need to generalize / modularize it while focusing on REST. Added to TODO
+## Installation
 
-### Configuration
+``
+gem install coinbase-advanced
+```
+
+or add to Gemfile:
+
+```
+gem "coinbase-advanced"
+```
+
+and run bundle install
+
+## Configuration
 
 Configuration settings + defaults
 
@@ -38,3 +51,41 @@ Coinbase::Advanced.log_filter_params = ["api_key", "api_secret"] # filters sensi
 
 Coinbase::Advanced.verbose = false
 ```
+
+## Examples
+
+```ruby
+require "coinbase-advanced"
+
+# recommended to simply point to key file rather than exporting api key/secret individually
+# first export COINBASE_JSON_KEY_FILE=absolute_key_file_path
+Coinbase::Advanced.key_file = ENV.fetch("COINBASE_JSON_KEY_FILE", nil)
+
+# uncomment for verbose mode
+# Coinbase::Advanced.verbose = true
+client = Coinbase::Advanced::REST::RESTBase.new
+
+res = client.get_server_time.response
+puts "Server time: #{res.iso}"
+
+res = client.get_product(product_id: "BTC-USD").response
+puts "Product: #{res.product_id} - Price: #{res.price}"
+
+res = client.list_fills(limit: "3").response
+res.fills.each_with_index do |fill, i|
+  puts "Fill #{i + 1}\n#{fill.inspect}\n"
+end
+
+res = client.list_futures_positions.response
+if res.positions.empty?
+  puts "No positions"
+else
+  res.positions.each_with_index do |position, i|
+    puts "Position #{i + 1}\n#{position.inspect}\n"
+  end
+end
+```
+
+## Contribution
+
+Open issue or fork + submit PR. You know the drill
