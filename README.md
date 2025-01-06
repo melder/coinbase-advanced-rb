@@ -18,7 +18,7 @@ Consider this wrapper in alpha / prototype stage. Publishing it despite lack of 
 
 ## Installation
 
-``
+```
 gem install coinbase-advanced
 ```
 
