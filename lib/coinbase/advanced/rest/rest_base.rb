@@ -7,10 +7,17 @@ module Coinbase
       class RESTBase < APIBase
         attr_reader :session
 
-        include Resources::Futures
-        include Resources::Orders
+        include Resources::Accounts
         include Resources::Products
+        include Resources::Orders
+        include Resources::Portfolios
+        include Resources::Futures
+        include Resources::Perpetuals
+        include Resources::Converts
+        include Resources::Fees
         include Resources::Public
+        include Resources::PaymentMethods
+        include Resources::DataAPI
 
         AUTH_ERROR_MESSAGE = <<~HEREDOC
           Unauthenticated request to private endpoint. If you wish to access private endpoints, you must \
