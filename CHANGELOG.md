@@ -1,5 +1,5 @@
-## [Unreleased]
+# Changelog
 
-## [0.1.0] - 2024-12-03
+## [0.1.1] - 2025-01-05
 
 - Initial release
