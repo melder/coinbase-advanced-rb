@@ -9,6 +9,9 @@
 11. keep constants.rb ?
 12. Docker devcontainer would be nice
 13. move test.rb to examples directory
+14. Meditate on and finalize base_response <-> rest_base design
+14b. Handle HTTP statuses (2xx - 5xx) appropriately with hints to user especially 4xx, 5xx responses.
+15. Security audit: Oauth2 support (assuming it works with Advanced API) will have to be built on top of wrapper as it requires browser + JS. Mimicking all of that from command line will be a pain in the ass.
 
 # DONE
 

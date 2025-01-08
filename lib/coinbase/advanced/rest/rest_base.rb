@@ -5,7 +5,7 @@ module Coinbase
     module REST
       # RESTBase sets up, executes, and appropriately handles errors strictly within context of HTTP + REST communication
       class RESTBase < APIBase
-        attr_reader :session
+        attr_reader :session, :base_response
 
         include Resources::Accounts
         include Resources::Products
@@ -27,6 +27,7 @@ module Coinbase
         def initialize(config = Coinbase::Advanced.config)
           super
           @session = Faraday.new
+          @base_response = nil
         end
 
         def set_headers(method, path)
@@ -93,7 +94,8 @@ module Coinbase
 
           @config.log("Response object:\n\n#{response.pretty_inspect}") if @verbose
 
-          BaseResponse.new(JSON.parse(response.body))
+          @base_response = BaseResponse.new(JSON.parse(response.body))
+          @base_response.response
         end
 
         def get(url_path, params = {}, auth_required: true)

@@ -65,18 +65,18 @@ Coinbase::Advanced.key_file = ENV.fetch("COINBASE_JSON_KEY_FILE", nil)
 # Coinbase::Advanced.verbose = true
 client = Coinbase::Advanced::REST::RESTBase.new
 
-res = client.get_server_time.response
+res = client.get_server_time
 puts "Server time: #{res.iso}"
 
-res = client.get_product(product_id: "BTC-USD").response
+res = client.get_product(product_id: "BTC-USD")
 puts "Product: #{res.product_id} - Price: #{res.price}"
 
-res = client.list_fills(limit: "3").response
+res = client.list_fills(limit: "3")
 res.fills.each_with_index do |fill, i|
   puts "Fill #{i + 1}\n#{fill.inspect}\n"
 end
 
-res = client.list_futures_positions.response
+res = client.list_futures_positions
 if res.positions.empty?
   puts "No positions"
 else
